@@ -48,7 +48,7 @@ export default function Login() {
 
         .card {
           backdrop-filter: blur(15px);
-          background: rgba(255, 255, 255, 0.05);
+          background: rgba(94, 16, 16, 0.05);
           padding: 40px;
           border-radius: 20px;
           width: 320px;
@@ -89,7 +89,7 @@ export default function Login() {
           padding: 12px;
           border: none;
           border-radius: 10px;
-          background: #3b82f6;
+          background: #0047b1;
           color: white;
           font-weight: bold;
           cursor: pointer;
@@ -97,7 +97,7 @@ export default function Login() {
         }
 
         button:hover {
-          background: #2563eb;
+          background: #190167;
           transform: scale(1.03);
         }
       `}</style>
