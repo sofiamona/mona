@@ -1,4 +1,5 @@
 "use client";
+import { IMaskInput } from "react-imask";
 import { useState } from "react";
 import { supabase } from "@/lib/supabase"; // Certifique-se de que o caminho está correto
 
@@ -71,28 +72,42 @@ export default function CadastroCliente() {
 
         <form onSubmit={handleSubmit} style={styles.form}>
           {[
-            { name: "nome", placeholder: "Nome completo" },
-            { name: "email", placeholder: "Email", type: "email" },
-            { name: "cpf", placeholder: "CPF (apenas números)", maxLength: 11 },
-            { name: "telefone", placeholder: "Telefone" },
-            { name: "rg", placeholder: "RG" },
-            { name: "cidade", placeholder: "Cidade" },
-            { name: "estado", placeholder: "Estado (Ex: SP)", maxLength: 2 },
-            { name: "cnh", placeholder: "CNH" },
-          ].map((field) => (
-            <input
-              key={field.name}
-              type={field.type || "text"}
-              name={field.name}
-              placeholder={field.placeholder}
-              value={form[field.name]}
-              onChange={handleChange}
-              maxLength={field.maxLength}
-              required
-              disabled={loading}
-              style={styles.input}
-            />
-          ))}
+  { name: "nome", placeholder: "Nome completo" },
+  { name: "email", placeholder: "Email", type: "email" },
+  { name: "cpf", placeholder: "CPF", mask: "000.000.000-00" },
+  { name: "telefone", placeholder: "Telefone", mask: "(00) 00000-0000" },
+  { name: "rg", placeholder: "RG" },
+  { name: "cnh", placeholder: "CNH" },
+  { name: "estado", placeholder: "Estado (Ex: SP)", maxLength: 2 },
+  { name: "cidade", placeholder: "Cidade" },
+].map((field) =>
+  field.mask ? (
+    <IMaskInput
+      key={field.name}
+      mask={field.mask}
+      value={form[field.name]}
+      onAccept={(value) =>
+        setForm({ ...form, [field.name]: value })
+      }
+      placeholder={field.placeholder}
+      disabled={loading}
+      style={styles.input}
+    />
+  ) : (
+    <input
+      key={field.name}
+      type={field.type || "text"}
+      name={field.name}
+      placeholder={field.placeholder}
+      value={form[field.name]}
+      onChange={handleChange}
+      maxLength={field.maxLength}
+      required
+      disabled={loading}
+      style={styles.input}
+    />
+  )
+)}
 
           <button 
             type="submit" 
