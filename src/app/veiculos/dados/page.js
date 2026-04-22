@@ -1,76 +1,108 @@
 "use client";
 import { useState } from "react";
 
-export default function Cliente() {
-  const [cliente, setCliente] = useState(null);
+export default function AlterarVeiculo() {
   const [busca, setBusca] = useState("");
+  const [veiculo, setVeiculo] = useState(null);
 
-  const buscarCliente = () => {
-    const clienteFake = {
-      nome: "João Silva",
-      email: "joao@email.com",
+  // Simulação de busca
+  const buscarVeiculo = () => {
+    const veiculoFake = {
+      modelo: "Tucson",
+      fabricante: "Hyundai",
+      cor: "Preto",
+      ano: "2022",
+      preco: "120000",
+      chassi: "9BWZZZ377VT004251",
     };
-    setCliente(clienteFake);
+
+    setVeiculo(veiculoFake);
   };
 
   const handleChange = (e) => {
-    setCliente({
-      ...cliente,
+    setVeiculo({
+      ...veiculo,
       [e.target.name]: e.target.value,
     });
   };
 
   const salvar = () => {
-    console.log("Dados salvos:", cliente);
-    alert("Cliente atualizado com sucesso!");
+    console.log("Veículo atualizado:", veiculo);
+    alert("Veículo atualizado com sucesso! 🚗");
   };
 
   return (
     <div style={styles.page}>
-      <div style={styles.overlay}></div>
-
       <div style={styles.card}>
-        <h1 style={styles.title}>Alterar Cliente</h1>
+        <h1 style={styles.title}>Alterar Veículo</h1>
         <p style={styles.subtitle}>Busque e edite os dados</p>
 
         {/* BUSCA */}
         <div style={styles.searchBox}>
           <input
             type="text"
-            placeholder="Buscar cliente"
+            placeholder="Buscar veículo (modelo ou chassi)"
             value={busca}
             onChange={(e) => setBusca(e.target.value)}
             style={styles.input}
           />
 
-          <button onClick={buscarCliente} style={styles.button}>
+          <button onClick={buscarVeiculo} style={styles.button}>
             Buscar
           </button>
         </div>
 
         {/* EDIÇÃO */}
-        {cliente && (
+        {veiculo && (
           <div style={styles.form}>
             <h2 style={styles.subtitle}>Editar Dados</h2>
 
             <input
-              type="text"
-              name="nome"
-              value={cliente.nome}
+              name="modelo"
+              value={veiculo.modelo}
               onChange={handleChange}
               style={styles.input}
             />
 
             <input
-              type="email"
-              name="email"
-              value={cliente.email}
+              name="fabricante"
+              value={veiculo.fabricante}
+              onChange={handleChange}
+              style={styles.input}
+            />
+
+            <input
+              name="cor"
+              value={veiculo.cor}
+              onChange={handleChange}
+              style={styles.input}
+            />
+
+            <input
+              name="ano"
+              type="number"
+              value={veiculo.ano}
+              onChange={handleChange}
+              style={styles.input}
+            />
+
+            <input
+              name="preco"
+              type="number"
+              value={veiculo.preco}
+              onChange={handleChange}
+              style={styles.input}
+            />
+
+            <input
+              name="chassi"
+              value={veiculo.chassi}
               onChange={handleChange}
               style={styles.input}
             />
 
             <button onClick={salvar} style={styles.button}>
-              Salvar
+              Salvar Alterações
             </button>
           </div>
         )}
@@ -79,31 +111,24 @@ export default function Cliente() {
   );
 }
 
-const styles = {
- page: {
-  minHeight: "100vh",
-  background: "linear-gradient(135deg, #0a0f2c, #020617)",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  position: "relative",
-},
+/* ===== ESTILO PADRÃO DO SISTEMA ===== */
 
-  overlay: {
-    position: "absolute",
-    inset: 0,
-    background: "rgba(0,0,0,0.8)",
+const styles = {
+  page: {
+    minHeight: "100vh",
+    background: "linear-gradient(135deg, #0a0f2c, #020617)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
 
   card: {
-    position: "relative",
-    zIndex: 2,
     background: "#111",
     padding: "30px",
     borderRadius: "12px",
     width: "100%",
     maxWidth: "500px",
-    boxShadow: "0 0 30px rgba(0, 0, 0, 0.2)",
+    boxShadow: "0 0 30px rgba(255,0,0,0.2)",
     border: "1px solid #071c92",
   },
 
@@ -116,8 +141,8 @@ const styles = {
 
   subtitle: {
     color: "#aaa",
-    marginBottom: "15px",
     textAlign: "center",
+    marginBottom: "15px",
   },
 
   searchBox: {
@@ -145,7 +170,7 @@ const styles = {
     padding: "12px",
     borderRadius: "6px",
     border: "none",
-    background: "linear-gradient(90deg, #04063d, #cc0000)",
+    background: "linear-gradient(90deg, #1419a3, #cc0000)",
     color: "#fff",
     fontWeight: "bold",
     cursor: "pointer",

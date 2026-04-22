@@ -13,7 +13,7 @@ export default function Login() {
   return (
     <div className="container">
       <div className="card">
-        <img src="/logo.jpg"/>
+        <img src="/logo.png"/>
         <h1>Mona</h1>
         <p>Cadastro do funcionaria</p>
 
